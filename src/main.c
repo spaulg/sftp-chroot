@@ -1,3 +1,20 @@
+
+/*
+ Copyright 2013 Simon Paulger <spaulger@codezen.co.uk>
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 #include "header/main.h"
 
 char *user_homedir;
@@ -98,18 +115,18 @@ int init_proxy() {
         
         // Update the server stdin/stdout file descriptors with server
         close (server_writedes[0]);
-	close (server_readdes[1]);
+        close (server_readdes[1]);
 
-	from_server = server_readdes[0];
-	to_server = server_writedes[1];
+        from_server = server_readdes[0];
+        to_server = server_writedes[1];
 
     } else if (sftp_server_pid == 0) {
         // Child process
-	// Close additional pipes and contiue to new process
-	close (server_readdes[0]);
-	close (server_writedes[1]);
+        // Close additional pipes and contiue to new process
+        close (server_readdes[0]);
+        close (server_writedes[1]);
 
-	// Ensure the stdin/stdout filedes numbers connect to our pipes
+	    // Ensure the stdin/stdout filedes numbers connect to our pipes
         close (STDIN_FILENO);
         close (STDOUT_FILENO);
         dup(server_writedes[0]);
@@ -131,7 +148,8 @@ void* start_inbound_parser_thread(void *tparms) {
     pthread_detach(pthread_self());
     
     debug("Starting inbound packet parser");
-    parse_packet(((struct thread_parm_t*) tparms)->to, ((struct thread_parm_t*) tparms)->from, ((struct thread_parm_t*) tparms)->direction);
+    parse_packet(((struct thread_parm_t*) tparms)->to, ((struct thread_parm_t*) tparms)->from,
+        ((struct thread_parm_t*) tparms)->direction);
     debug("Finished parsing inbound packets");
     
     // Kill the other thread and close all pipes

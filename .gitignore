@@ -1,10 +1,7 @@
 .idea/
-*.o
-.deps/
-Makefile
 config.h
 config.h.in~
 config.log
 config.status
-sftp-chroot
 stamp-h1
+autom4te.cache/
