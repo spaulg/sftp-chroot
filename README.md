@@ -44,8 +44,7 @@ the input stream of the other end of the connection.
 Outgoing packets from the server to the client have their directory paths adjusted to remove
 the home directory, whilst incoming packets are adjusted to add the users home directory.
 
-This forces all communications to be restricted to the confines of the users home directory,
-effectively rooting them as chroot would.
+This forces all communications to be restricted to the users home directory.
 
 The process works because the sftp-chroot shell is above the encryption of SSH but below the 
 SFTP server.
