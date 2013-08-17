@@ -77,6 +77,6 @@ esac
 AC_SUBST([CFLAGS])
 
 # Produce make files
-AC_CONFIG_FILES([src/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile])
 
 AC_OUTPUT
