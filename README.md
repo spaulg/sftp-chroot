@@ -33,6 +33,23 @@ make install
 
 ```
 
+## How It Works
+
+The /bin/sftp-chroot binary is installed as a user shell. It acts as a mediator between
+the sftp-server process and the client connection. Each end of the connection has a
+stdin and stdout (2 of each, making 4 streams in total). Each stdout stream is appropriately 
+parsed by the sftp-chroot binary for packets, which are modified and rewritten back to
+the input stream of the other end of the connection.
+
+Outgoing packets from the server to the client have their directory paths adjusted to remove
+the home directory, whilst incoming packets are adjusted to add the users home directory.
+
+This forces all communications to be restricted to the confines of the users home directory,
+effectively rooting them as chroot would.
+
+The process works because the sftp-chroot shell is above the encryption of SSH but below the 
+SFTP server.
+
 ## License
 
 Copyright 2013 Simon Paulger <spaulger@codezen.co.uk>
