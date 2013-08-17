@@ -49,6 +49,19 @@ This forces all communications to be restricted to the users home directory.
 The process works because the sftp-chroot shell is above the encryption of SSH but below the 
 SFTP server.
 
+## Motivations
+
+This project was a university dissertation to root a user SFTP connection for security
+purposes.
+
+Modern versions of OpenSSH have the ability to root a users connection, however a need existed
+to achieve the same effect on older versions of OpenSSH running on deprecated server software
+with a desire to keep the version of OpenSSH running for ease of administration purposes.
+
+If you have a version of OpenSSH that can perform rooting of the user connection to their
+home directory, then it should be used over this project as this project imposes a small
+performance penalty to connection speed on file access.
+
 ## License
 
 Copyright 2013 Simon Paulger <spaulger@codezen.co.uk>
